@@ -1,0 +1,30 @@
+<html>
+<head>
+    <style>
+        .marquee {
+            width: 100%; /* 宽度设置为100%，使文本可以横向滚动 */
+            overflow: hidden; /* 超出部分隐藏 */
+            white-space: nowrap; /* 保证文本在一行显示 */
+        }
+
+        .marquee-text {
+            display: inline-block;
+            animation: marquee 10s linear infinite; /* 滚动效果，10秒完成一次 */
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%); /* 从右侧开始 */
+            }
+            100% {
+                transform: translateX(-100%); /* 向左移动，直到完全消失 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="marquee">
+        <div class="marquee-text">这是一个用 CSS 实现的跑马灯效果！</div>
+    </div>
+</body>
+</html>

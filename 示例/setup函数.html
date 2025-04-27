@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.global.prod.js"></script> 
+</head>
+<body>
+    <div id="app">
+        <p>计数器: {{ count }}</p>
+        <button @click="increment">增加</button>
+
+    </div>
+    <script>
+        const { createApp, ref } = Vue;
+
+        createApp({
+            setup() {
+                const count = ref(0);  // 创建响应式变量
+
+                function increment() {
+                    count.value++;  // 更新变量
+                }
+
+                return { count, increment };  // 让模板可以访问 count 和 increment
+            }
+        }).mount("#app");
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 3 箭头函数示例</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script> 
+</head>
+<body>
+
+    <div id="app">
+        <p>单价: {{ price }}</p>
+        <p>数量: {{ quantity }}</p>
+        <p>总价: {{ totalPrice }}</p>
+        <button @click="increaseQuantity">增加数量</button>
+    </div>
+
+    <script>
+        const { createApp, ref, computed } = Vue;
+
+        createApp({
+            setup() {
+                const price = ref(100);    // 单价
+                const quantity = ref(2);   // 数量
+
+                // 计算总价（使用箭头函数）
+                const totalPrice = computed(() => price.value * quantity.value);
+
+                 //computed() 接收一个函数，这个函数 返回计算后的值
+                // 相当于：
+                // computed(function() {
+                //     return price.value * quantity.value;
+                // });
+                //箭头函数简化了写法，不需要 return 关键字。
+
+                // 增加数量的方法
+                const increaseQuantity = () => {
+                    quantity.value++;
+                };
+
+                return { price, quantity, totalPrice, increaseQuantity };
+            }
+        }).mount("#app");
+    </script>
+
+</body>
+</html>
+<!-- 
+    箭头函数是一种简洁的函数表达式，它允许我们以更简洁的方式编写函数。在 Vue 3 中，箭头函数可以用于计算属性和方法的定义。
+
+    在上面的示例中，我们使用了箭头函数来定义计算属性 `totalPrice`。箭头函数的语法是 `() => { ... }`，它返回一个计算后的值。在这个例子中，`totalPrice` 计算属性返回了 `price` 和 `quantity` 的乘积。

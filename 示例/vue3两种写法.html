@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue3两种写法</title>
+    <!-- 第一种写法定义了 app 变量，适用于复杂应用，第二种写法更简洁，适用于简单场景 -->
+    <script src="./js/vue.global.prod.js"></script> 
+</head>
+<body>
+    <div id="app">
+        {{message}}
+    </div>
+    <script>
+        //第一种写法
+
+        // 1.创建vue实例
+        const app = Vue.createApp({
+            data(){
+                return {
+                    message:'hello vue3'
+                }
+            },
+        });
+        // 2.挂载到dom
+        app.mount('#app');
+
+        //第二种写法
+
+        // const { createApp } = Vue;  
+        // createApp({ 
+        //     data() { 
+        //         return { message: "Hello Vue 3!" }; 
+        //     } 
+        // }).mount("#app");
+
+
+    </script>
+    </script>
+</body>
+</html>

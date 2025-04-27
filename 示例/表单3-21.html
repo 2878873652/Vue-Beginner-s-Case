@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.45/dist/vue.global.js"></script>
+</head>
+<body>
+    <!-- v-model 双向绑定 -->
+    <div id = 'app'>
+            <input type="text" @input="inputFun">{{msg}}
+            <!--语法糖-->
+            <input type="text" v-model="msg"> <br>
+           
+            用户名：<input type="text" v-model="FormData.username"><br>
+            密码：<input type="password" v-model="FormData.password"><br>
+
+            <!--复选框-->
+            <!--绑定一个数组 复选框（勾选） 向数组加入value的值-->
+            兴趣爱好：
+            <input type="checkbox" v-model="FormData.hobby" value="唱">唱
+            <input type="checkbox" v-model="FormData.hobby" value="跳">跳
+            <input type="checkbox" v-model="FormData.hobby" value="rap">rap<br>
+
+            <!--绑定布尔值-->
+            同意协议：<input type="checkbox" v-model="FormData.isAgree"/>同意<上课认真学习>协议 <br>
+
+            <!--单选按钮-->
+            性别：<input type="radio" v-model="FormData.sex" >男
+            <input type="radio" v-model="female">女<br>
+
+            <!--下拉菜单-->
+            <select v-model="FormData.text">
+                <option value="option1">李子轩是猪猪</option>
+                <option value="option2">李子轩是狗狗</option>
+                <option value="option3">李子轩是猫猫</option>
+            </select>
+            
+            <!--多行文本框（文本域）-->
+            <input type="color">
+
+            <!--修饰符-->
+            <!--.trim 去除前后空格 .lazy失焦同步数据 .number-->
+            <input type="text" v-model.lazy="msg/">
+
+
+    </div>
+
+        
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    msg: '666',
+                    FormData:{
+                        username: '李子轩',
+                        password: '123',
+                        hobby: [],
+                        isAgree:false,
+                        sex:''
+                    }
+                };
+            },
+            methods: {
+                inputFun(e) {
+                    this.msg = e.target.value;
+                },
+                // submit(){
+                //     let res = {
+                //         username: this.username,  // 从 Vue 的 data 中获取 username 的值
+                //         password: this.password   // 从 Vue 的 data 中获取 password 的值
+                //     };
+                // }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

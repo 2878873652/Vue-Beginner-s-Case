@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>官网组件示例</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .root {
+            display: flex;
+            flex-direction: column;
+            border: 2px solid #333;
+            background: #eee;
+            padding: 20px;
+        }
+        .header {
+            height: 50px;
+            background: #ccc;
+            text-align: center;
+            line-height: 50px;
+        }
+        .main {
+            display: flex;
+            margin-top: 20px;
+        }
+        .main .content {
+            width: 70%;
+            background: #ddd;
+            padding: 10px;
+            margin-right: 20px;
+        }
+        .aside {
+            width: 30%;
+            background: #ddd;
+            padding: 10px;
+        }
+        .article {
+            background: #eee;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #999;
+        }
+        .item {
+            background: #eee;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #999;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <Root></Root>
+    </div>
+
+    <script>
+        // Header 组件
+        Vue.component('Header', {
+            template: `
+                <div class="header">
+                    Header
+                </div>
+            `
+        });
+
+        // Article 组件
+        Vue.component('Article', {
+            template: `
+                <div class="article">
+                    Article
+                </div>
+            `
+        });
+
+        // Item 组件
+        Vue.component('Item', {
+            template: `
+                <div class="item">
+                    Item
+                </div>
+            `
+        });
+
+        // Main 组件
+        Vue.component('Main', {
+            template: `
+                <div class="main">
+                    <div class="content">
+                        <Article />
+                        <Article />
+                    </div>
+                    <div class="aside">
+                        <Item />
+                        <Item />
+                        <Item />
+                    </div>
+                </div>
+            `
+        });
+
+        // Root 组件
+        Vue.component('Root', {
+            template: `
+                <div class="root">
+                    <Header />
+                    <Main />
+                </div>
+            `
+        });
+
+        // 创建 Vue 实例
+        new Vue({
+            el: '#app'
+        });
+    </script>
+</body>
+</html>

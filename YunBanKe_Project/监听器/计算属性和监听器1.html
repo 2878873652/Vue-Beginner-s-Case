@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性</title>
+    <script src="../js/vue.global.prod.js"></script> 
+
+</head>
+<body>
+    <div id="app">
+        <label>语文: <input v-model="chinese" type="number"></label><br>
+        <label>数学: <input v-model="math" type="number"></label><br>
+        <label>英语: <input v-model="english" type="number"></label><br>
+        <p>您的总分是: {{ totalScore }}</p>
+        <p>您的平均分是: {{ averageScore }}</p>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    chinese: 0,
+                    math: 0,
+                    english: 0
+                };
+            },
+            computed: {
+                totalScore() {
+                    return this.chinese + this.math + this.english;
+                },
+                averageScore() {
+                    return this.totalScore / 3;
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

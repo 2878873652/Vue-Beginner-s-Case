@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+</head>
+<body>
+    <!--挂载点 div-->
+    <div id="app">
+        <!--2.通过自定义属性传入参数 -->
+        <comp-a :money="1500"></comp-a> <!--加冒号，变成表达式（值是数字）,不加:，控制台1500是字符串--> <!--=前后不能有空格，是Html代码-->
+        <comp-a :money="msg"></comp-a>  <!-- 第二个，传的是 vm.data.msg -->
+    </div>
+
+    <template id ='A'>
+        <h1>子组件{{money}}</h1>
+
+    </template>
+
+
+    <script>
+    
+        let compA = {
+            //1.子组件通过自定义属性接收参数
+            //props:['money'],
+            props:{
+                //money:Number,//规定数字类型
+               // money:[Number,String]//多种类型
+                money:{
+                    type:[Number,String],//多种类型
+                    required:true,//必填项
+                    default:200,//默认值
+                },
+                time:{
+                    validor:function(value){
+                        return value>1000
+                    }
+
+                }
+            },
+            template:'#A',
+            data(){
+                return {
+                    msg:0
+
+                }
+            }
+
+        }  
+
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                msg:900
+                
+            },
+            //局部注册
+            components:{
+                compA,
+            },
+            
+        })
+    </script>
+</body>
+</html>

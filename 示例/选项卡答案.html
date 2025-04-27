@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        .tabs {
+            width:400px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 6px #ccc;
+        }
+        .tabsHeader {
+            display: flex;
+            height: 40px;
+            background-color: rgb(245, 247, 250);
+            border-bottom: 1px solid #ccc;
+        }
+        .tabsItem {
+            width: 40px;
+            height: 60px;
+            flex: 1;
+            line-height: 40px;
+            text-align: center;
+            cursor: pointer;
+
+        }
+        .tabsBody {
+            padding: 10px;
+        }
+        .active {
+            border-bottom: none;
+            background-color: #fff
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.0/dist/vue.global.js"></script>
+    <div id = "#app">
+        <div class = "tabs">
+            <div class = "tabsHeader">
+                <div class = "tabsItem":class = "{active:activeTabs =='热点'}" @click = "changeTabs('热点)">热点</div>
+                <div class = "tabsItem":class = "{active:activeTabs =='娱乐'}" @click =" changeTabs('娱乐')">娱乐</div>
+                <div class = "tabsItem":class = "{active:activeTabs =='财经'}" @click =" changeTabs('财经')">财经</div>
+                <div class = "tabsItem":class = "{active:activeTabs =='游戏'}" @click =" changeTabs('游戏')">游戏</div>
+                <div class = "tabsItem":class = "{active:activeTabs =='影视'}" @click =" changeTabs('影视')">影视</div>
+            </div>
+
+            <div class = "tabsBody">
+                {{activateTabs}}热点新闻
+            </div>
+        </div>
+
+    </div>
+    <script>
+        const {createApp,ref} = Vue
+        createApp({
+            setup(){
+                //当前激活项
+                let activate = ref('热点')
+                //修改激活项
+                let changeTabs = (val) => {
+                    activate.value = val
+                }
+                return {
+                    activateTabs,
+                }
+
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>

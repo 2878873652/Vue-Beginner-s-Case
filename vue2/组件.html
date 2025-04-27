@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+
+</head>
+<body>
+    <div id="app">
+        <!-- 组件 component 将ui拆分为一个个独立的 可重复的-->
+        <!-- 注册方式 全局注册 局部注册 -->
+        <!-- 组件名 全小写带-->
+         <!--html大小写不敏感-->
+         {{msg}}
+         <my-test></my-test>
+         <my-com></my-com>
+    </div>
+    
+    <!--内置组件-->
+    <template id="test">
+        <h1>我是子组件</h1>
+    </template>
+
+    <script>
+        //全局组件 所有实例都可以使用
+        //Vue.component('组件名',{配置对象})
+        Vue.component('my-test',{
+            //vue2中组件的模板只能有一个根元素 vue3中可以多个根元素
+            template:'#test',
+            data:{
+                
+            },
+            //computed
+            //methods
+            //wqatch
+        })
+        let vm=new Vue({
+            el:'#app',
+            data:{
+                
+            }
+        })
+    </script>
+</body>
+</html>

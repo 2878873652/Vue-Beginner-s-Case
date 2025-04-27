@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <style>
+        .loginBox, .RegisterBox {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+        }
+        .btn {
+            margin-top: 10px;
+            padding: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <a href="javascript:;" @click="islogin = true">登录</a>
+        <a href="javascript:;" @click="islogin = false">注册</a>
+        <!--内置组件-->
+        <!--动态组件 is的属性值是组件名（字符串）-->
+        <component :is="compName"></component>
+        <!-- 登录组件 -->
+        <login v-if="islogin"></login>
+        <!-- 注册组件 -->
+        <register v-else></register>
+    </div>
+
+    <!-- 登录模板 -->
+    <template id="login">
+        <div class="loginBox">
+            账号：<input type="text"><br>
+            密码: <input type="password"><br>
+            <div class="btn">登录</div>
+        </div>
+    </template>
+    
+    <!-- 注册模板 -->
+    <template id="register">
+        <div class="RegisterBox">
+            账号：<input type="text"><br>
+            密码: <input type="password"><br>
+            <div class="btn">注册</div>
+        </div>
+    </template>
+    
+    <script>
+        // 登录组件
+        let login = {
+            template: '#login',
+        }
+
+        // 注册组件
+        let register = {
+            template: '#register',
+        }
+
+        // 创建 Vue 实例
+        new Vue({
+            el: '#app',
+            data: {
+                islogin: true // 控制是否显示登录或注册
+            },
+            components: {
+                login,
+                register
+            }
+        });
+    </script>
+</body>
+</html>

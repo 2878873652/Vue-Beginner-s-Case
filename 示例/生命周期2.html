@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 生命周期</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{ message }}</p>
+        <button @click="updateMessage">更新数据</button>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+        
+        createApp({
+            data() {
+                return {
+                    message: "Hello Vue!"
+                };
+            },
+            methods: {
+                updateMessage() {
+                    this.message = "数据已更新!";
+                }
+            },
+            beforeCreate() {
+                console.log("beforeCreate:实例初始化，但 data 还未创建", this.message); // undefined
+            },
+            created() {
+                console.log("created:实例已创建,data 可用", this.message); // "Hello Vue!"
+            },
+            beforeMount() {
+                console.log("beforeMount:模板编译完成，但未挂载到 DOM");
+            },
+            mounted() {
+                console.log("mounted:DOM 挂载完成，可以进行 API 请求等操作");
+            },
+            beforeUpdate() {
+                console.log("beforeUpdate:数据更新前", this.message);
+            },
+            updated() {
+                console.log("updated:数据更新后", this.message);
+            },
+            beforeUnmount() {
+                console.log("beforeUnmount:组件即将销毁");
+            },
+            unmounted() {
+                console.log("unmounted:组件已销毁");
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>

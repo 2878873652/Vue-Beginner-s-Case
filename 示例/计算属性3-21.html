@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.45/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="a">+
+        <input type="text" v-model="b">=
+        {{a+b}}
+        {{sum()}}
+        <!-- 计算属性不带() -->
+        {{add}}
+    </div>
+
+    <script>
+        const{createApp}=Vue
+        createApp({
+            data() {
+                return {
+                    a:5,
+                    b:3,
+                    c:0
+                }
+            },
+            //计算属性
+            computed:{
+                //键： 是属性名（data,methods,computed不能重名） 值（函数，对象）
+                //函数形式（getter) 一定要return 
+
+
+                //普通函数形式：
+                
+                // add(){
+                //     return this.a + this.b //没有 set 方法，因此不能用于处理用户输入或外部数据的变化
+                // }
+
+                //对象形式
+                add:{
+                    get(){
+                        return this.a + this.b
+                    },
+                    set(val){
+                        this.a = val[0]
+                        this.b = val.slice(1)
+                    }
+                }
+            },
+            
+            methods: {
+                sum(){
+                    this.c++
+                    console.log(this.c)
+                    return this.a + this.b
+                }
+            }
+
+        }).mount('#app')
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>  
+<html lang="zh">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>小灯的开关及颜色 - Class 方法</title>   
+    <style>  
+        .lamp {  
+            width: 100px;  
+            height: 100px;  
+            border-radius: 50%;  
+            border: 2px solid black;  
+            margin-top: 10px;  
+            background-color: transparent; 
+        }  
+        .red {  
+            background-color: red;  
+        }  
+        .green {  
+            background-color: green;  
+        }  
+        .blue {  
+            background-color: blue;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div id="app">  
+        <button @click="toggleLamp">{{ buttonText }}</button>  
+        <div :class="['lamp', lampClass]"></div>   
+    </div>  
+
+    <script src="./js/vue.global.prod.js"></script>   
+
+    <script>  
+        const { createApp } = Vue;  
+
+        createApp({  
+            data() {  
+                return {  
+                    clickCount: 0,  
+                    buttonText: '开关',   
+                };  
+            },  
+            computed: {  
+                lampClass() {  
+                    switch (this.clickCount % 4) {  
+                        case 1: return 'red';  
+                        case 2: return 'green';  
+                        case 3: return 'blue';  
+                        default: return '';  
+                    }  
+                }  
+            },  
+            methods: {  
+                toggleLamp() {  
+                    this.clickCount++;  
+                    this.buttonText = this.clickCount % 4 === 0 ? '开关' : '关闭'; // 更新按钮文字  
+                }  
+            }  
+        }).mount('#app');  
+    </script>  
+</body>  
+</html>  

@@ -1,0 +1,46 @@
+<!DOCTYPE html>  
+<html lang="zh">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>超链接切换示例</title>  
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>  
+    <style>  
+        .link-box {  
+            border: 1px solid black;  
+            padding: 20px;  
+            margin: 10px 0;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div id="app">  
+        <div class="link-box">  
+            <a :href="link" target="_blank">{{ linkText }}</a>  
+        </div>  
+        <button @click="changeLink(1)">京东</button>  
+        <button @click="changeLink(2)">天猫</button>  
+    </div>  
+
+    <script>  
+        new Vue({  
+            el: '#app',  
+            data: {  
+                link: 'https://www.jd.com',    
+                linkText: '京东'              
+            },  
+            methods: {  
+                changeLink(button) {  
+                    if (button === 1) {  
+                        this.link = 'https://www.jd.com';  
+                        this.linkText = '京东';  
+                    } else if (button === 2) {  
+                        this.link = 'https://www.tmall.com';  
+                        this.linkText = '天猫';  
+                    }  
+                }  
+            }  
+        });  
+    </script>  
+</body>  
+</html>  

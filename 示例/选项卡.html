@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选项卡示例</title>
+    <style>
+        body {
+            display: flex;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-grow: 1;
+        }
+        .sidebar {
+            width: 200px;
+            border-right: 1px solid #000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar li {
+            padding: 10px 0;
+            cursor: pointer;
+            border: 1px solid #000;
+            margin-bottom: 5px;
+            background-color: #fff;
+            transition: background 0.3s;
+        }
+        .sidebar li:hover {
+            background-color: #f0f0f0;
+        }
+        .tabs-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: flex-start;
+            border-bottom: 2px solid #000;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #000;
+            border-bottom: none;
+            transition: background 0.3s;
+            background-color: #fff;
+        }
+        .tab:hover {
+            background-color: #f0f0f0;
+        }
+        .tab.active {
+            background-color: #D3D3D3;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="container">
+        <div class="sidebar">
+            <ul>
+                <li v-for="(item, index) in sidebarItems" :key="index">{{ item }}</li>
+            </ul>
+        </div>
+        <div class="tabs-container">
+            <div class="tabs">
+                <div
+                    class="tab"
+                    v-for="(tab, index) in tabs"
+                    :key="index"
+                    :class="{ active: currentTab === tab }"
+                    @click="changeTab(tab)">
+                    {{ tab }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.0/dist/vue.global.js"></script>
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    currentTab: '娱乐',
+                    tabs: ['娱乐', '财经', '游戏', '影视'],
+                    sidebarItems: ['热点', '热点新闻']
+                };
+            },
+            methods: {
+                changeTab(tab) {
+                    this.currentTab = tab;
+                    this.updateSidebarItems(tab);
+                },
+                updateSidebarItems(tab) {
+                    switch (tab) {
+                        case '财经':
+                            this.sidebarItems = ['财经', '财经内容'];
+                            break;
+                        case '游戏':
+                            this.sidebarItems = ['游戏', '游戏内容'];
+                            break;
+                        case '影视':
+                            this.sidebarItems = ['影视', '影视内容'];
+                            break;
+                        default:
+                            this.sidebarItems = ['热点', '热点新闻'];
+                    }
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

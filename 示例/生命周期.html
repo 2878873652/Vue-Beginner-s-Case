@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期钩子函数</title>
+    <script src="./js/vue.global.prod.js"></script> 
+
+</head>
+<body>
+    <div id="app">
+        {{a}}
+    </div>
+    <script>
+         const { createApp } = Vue//解构
+         createApp({
+            data(){
+                return {
+                    a:0
+                }
+            },
+            methods:{
+                fun(){
+
+                }
+            },
+             //生命周期钩子函数
+             //初始化
+             beforeCreate(){
+                 console.log('创建之前')
+             },
+             created(){
+                 console.log('创建完成')
+             },
+             //挂载
+             beforeMount(){
+                 console.log('挂载之前')
+             },
+             mounted(){
+                 console.log('挂载完成')
+             },
+             //更新
+             beforeUpdate(){
+                 console.log('更新之前')
+             },
+             updated(){
+                 console.log('更新完成')
+             },
+             //销毁
+             beforeUnmount(){
+                 console.log('销毁之前')
+             },
+             unmounted(){
+                 console.log('销毁完成')
+             }
+
+         }).mount('#app')
+
+        
+    </script>
+    
+</body>
+</html>

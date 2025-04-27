@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>官网组件示例</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        #app {
+            max-width: 1200px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .head {
+            height: 100px;
+            background-color: #4CAF50;
+            text-align: center;
+            line-height: 100px;
+            color: white;
+            font-size: 24px;
+            border-radius: 10px 10px 0 0;
+        }
+        .main {
+            display: flex;
+            padding: 20px;
+        }
+        .content {
+            width: 70%;
+            background-color: #fafafa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+        .aside {
+            width: 30%;
+            background-color: #f7f7f7;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .article {
+            background-color: #e8e8e8;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+        }
+        .asideitem {
+            background-color: #f0e68c;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <my-header></my-header>
+        <div class="main">
+            <my-main></my-main>
+            <my-aside></my-aside>
+        </div>
+    </div>
+
+    <script>
+        // 文章组件
+        let myArticle = {
+            template: `<div class="article">文章</div>`
+        };
+
+        // 侧边栏条目组件
+        let asideitem = {
+            template: `<div class="asideitem">Item</div>`
+        };
+
+        // 头部组件
+        let myHeader = {
+            template: `<div class="head">头部</div>`
+        };
+
+        // 主体组件
+        let myMain = {
+            template: `
+                <div class="content">
+                    <my-article></my-article>
+                    <my-article></my-article>
+                </div>`,
+            components: {
+                myArticle
+            }
+        };
+
+        // 侧边栏组件
+        let myAside = {
+            template: `
+                <div class="aside">
+                    <asideitem></asideitem>
+                    <asideitem></asideitem>
+                    <asideitem></asideitem>
+                </div>`,
+            components: {
+                asideitem
+            }
+        };
+
+        // Vue 实例
+        let vm = new Vue({
+            el: '#app',
+            components: {
+                myHeader,
+                myMain,
+                myAside
+            }
+        });
+    </script>
+</body>
+</html>

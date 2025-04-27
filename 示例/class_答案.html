@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<<device-width>>, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.global.prod.js"></script> 
+    <style>
+        .lamp{
+            width:100px;
+            height:100px;
+            border: 1px solid black;
+            border-radius: 50%;
+        
+        }
+        .base{
+            width: 80px;
+            height: 40px;
+            background-color:#ccc;
+            margin: -20px 0 0 10px;
+            /* margin():
+            一个值：上下左右都是这个值
+            两个值：上下是第一个值，左右是第二个值
+            三个值：上，左右，下
+            四个值：上，右，下，左
+            */
+            .red{
+                background-color: red;
+            }
+            .green{
+                background-color: green;
+            }
+            .blue{
+                background-color: blue;
+            }
+
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- <button @click = "state = ++state %4">按钮</button> -->
+        <!-- <button @click = "state = ++state >3 ? 0 : state">按钮</button> -->
+        <button @click = "changeState">按钮</button>
+        {{state}}
+        <!-- <div class="lamp":class="{red:state == 1,blue: state == 2,green: state == 3}"></div> -->
+        <!-- <div class = "lamp": class ="state == 1 ? 'red' : state == 2 ? 'blue' : state == 3 ? 'green' : ' '"></div> -->
+        <!-- <div class = "lamp": class ="classList[state]"></div> -->
+         <!-- <div class ="lamp":style = "bcgackground-color: classList[state]"></div> -->
+          <div class = "lamp" :style ="styleList[state]"></div>
+        <div class ="base"></div>
+    </div>
+
+
+    <script>
+        const {createApp} = Vue
+        createApp({
+            //data:存数据
+            data(){
+                return {
+                    //state小灯状态: 0关闭（白色) 1红色 2蓝色 3绿色
+                    state:0,
+                    classList:['','red','blue','green'],
+                    styleList:['','background-color:red','background-color:blue','background-color:green']
+
+                }
+            },
+            methods:{
+                //存函数
+                 changeState()   {
+                        if(this.state >= 3){
+                            this.state = 0
+                        }else{
+                            this.state = ++this.state
+                        }
+                 }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <!--注意编译域-->
+        <my-link to="https://www.xiaohongshu.com/explore">
+            <sapn slot="pinin">{{msg}}</sapn>小红书
+        </my-link>
+        <my-link to="https://www.baidu.com">百度</my-link>
+    </div>
+
+    <template id="alink">
+        <a :href="to">
+            <!--插槽-->
+            <slot> </slot>
+            <!--具名插槽-->
+            <slot name="pinin"></slot>
+        </a>
+    </template>
+    
+    <script>
+        let link = {
+            props: ['to'], // 定义props
+            template: '#alink',
+            data() {
+                return {
+                    msg:'123'
+                }
+        }
+    }
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg:'456'
+            },
+            components: {
+                myLink: link
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!-- 3-25 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="a"/>
+    </div>
+    <script>
+        const {createApp} = Vue
+        createAPP({
+            data(){
+                return{
+                    a:''
+                }
+            },
+            watch:{
+                a(newVal,oldVal){
+                    console.log(newVal,oldVal)
+                }
+            }
+
+        }).mount('#app')
+
+    </script>
+</body>
+</html>

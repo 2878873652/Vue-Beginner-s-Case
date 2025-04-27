@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.prod.js" type="text/javascript"></script>
+
+</head>
+<body>
+    <div id ='app'>
+        <!-- 事件绑定v-on:简写 @ -->
+        <!-- js中事件必须带(),vue中(不传参),可以不用() -->
+        <!--不带(),可以使用内置参数(event)获取事件对象-->
+        <!--带()，可以主动传入$event事件对象-->
+         <!-- <button @click = "fun()">按钮</button>
+         <a href="http://www.baidu.com" @click = "fun($event)">百度</a> -->
+
+         <!--事件冒泡？事件捕获？事件委托-->
+         <div style="width: 100px; height: 100px; background-color: red" @click = "fun1">
+             <button @click.stop = "fun2">按钮</button> 
+            <!--. stop 阻止事件冒泡 
+                .present 阻止默认行为
+                .capture 事件捕获(父元素)
+                .self 只在自身触发(该元素不能被其他元素触发事件)
+              -->
+            
+         </div>
+
+
+
+    </div>
+    <script>
+        const{ createApp } = Vue
+        // createApp({
+        //     data(){
+        //         return{
+        //             a:0
+
+        //         }
+        //     },
+        //     methods:{
+        //         fun(){
+                        // 不建议使用箭头函数，因为没有this
+        //             console.log("我是一个函数")
+
+        //         }
+        //     }
+        // }).mount("#app")
+
+        createApp({
+            //组合式vue3常用
+            setup(){
+                //ref 返回一个响应式的简单数据(字符串，数字，布尔)
+                //reactive 返回一个响应式的复杂数据
+                //computed 计算属性
+                //watch 监听
+                //watchEffect 监听
+                //provide/inject 父子组件传值
+                //生命周期
+                // <!--onMounted
+                //     onUpdated
+                //     onUnmounted
+                //     onBeforeMount
+                //     onBeforeUpdate
+                // -->
+                function fun(event){
+                    // //内置函数event,事件对象
+                    // event.preventDefault() //阻止默认事件
+                    // event.stopPropagation() //阻止事件冒泡
+                    // console.log(event.target.tagName)
+            }
+            let fun1 = () => {
+                console.log("我是一个fun1")
+            }
+            let fun2 = () => {
+                console.log("我是一个fun2")
+            }
+            return {
+                //fun:fun, //在ES6中，函数名和变量名同名，可以省略 简写 fun: fun == fun
+                fun,
+                fun1,
+                fun2
+
+            }
+        }
+        }).mount('#app')
+    </script>
+</body>
+</html>

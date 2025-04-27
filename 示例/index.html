@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ a}}
+    </div>
+    <script>
+        //实例化vue
+        //let vm = Vue.createApp等于
+        const {createApp} = Vue //解构
+        createApp({
+            //data:function(){}:用来存数据的,等同于以下，对象函数写法
+            data(){
+                return{
+                    a:1
+                }
+            }
+        })
+        //选择挂载元素
+        app.mount('#app')
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <comp-a></comp-a>
+        <comp-b></comp-b>
+    </div>
+    <template id="A">
+        <button @click="send">A组件发送</button>
+    </template>
+    <template id="B">
+        <div>B组件</div>
+    </template>
+    
+    <script>
+        let Bus = new Vue()
+        let compA = {
+            template: '#A',
+            methods:{
+                send(){
+                    Bus.$emit('getMoney', 500)
+                }
+            }
+        }
+        let compB = {
+            template: '#B',
+            //在生命周期函数（初始化）
+            mounted(){
+                //监听事件
+                Bus.$on('getMoney', (money) => {
+                    console.log("B组件接收到", money)
+                })
+            }   
+        }
+        new Vue({
+            el: '#app',
+            components: {
+                compA,
+                compB
+            }
+        })
+    </script>
+</body>
+</html>

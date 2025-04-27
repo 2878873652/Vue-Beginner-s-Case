@@ -1,0 +1,53 @@
+<!DOCTYPE html>  
+<html lang="zh">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>小灯的开关及颜色 - Style 方法</title>  
+    
+    <style>  
+        .lamp {  
+            width: 100px;  
+            height: 100px;  
+            border-radius: 50%;  
+            border: 2px solid black;  
+            margin-top: 10px;  
+            background-color: transparent; /* 默认是关闭状态 */  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div id="app">  
+        <button @click="toggleLamp">开关</button>  
+        <div class="lamp" :style="lampStyle"></div>   
+    </div>  
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>  
+
+    <script>  
+        new Vue({  
+            el: '#app',  
+            data() {  
+                return {  
+                    clickCount: 0,  
+                };  
+            },  
+            computed: {  
+                lampStyle() {  
+                    switch (this.clickCount % 4) {  
+                        case 1: return { backgroundColor: 'red' };  
+                        case 2: return { backgroundColor: 'green' };  
+                        case 3: return { backgroundColor: 'blue' };  
+                        default: return { backgroundColor: 'transparent' }; // 关闭  
+                    }  
+                }  
+            },  
+            methods: {  
+                toggleLamp() {  
+                    this.clickCount++;  
+                }  
+            }  
+        });  
+    </script>  
+</body>  
+</html>  

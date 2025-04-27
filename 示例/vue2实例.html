@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 模板语法 -->
+        {{ b }}
+    </div>
+    <script>
+        // 实例化
+        let vm = new Vue({
+            el:'#app', //选择挂载元素
+            data:{   //存数据
+                b:666
+            }
+        })
+    </script>
+</body>
+</html>

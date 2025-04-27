@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.45/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="a">+
+        <input type="text" v-model="b">=
+        {{a+b}}
+       <!-- {{sum()}} -->
+        <!-- 计算属性不带() -->
+        {{add}}
+        <button @click = "add = '李四五'">修改计算属性add</button>
+        
+    </div>
+    <script>
+        // const creataeApp = Vue.createApp
+        const {createApp,ref,computed} = vue
+        createApp({
+            setup(){
+                let a = ref('张')
+                let b = ref('三')
+                // let add = computed(() =>{
+                //     return a.value + b.value
+                // })
+                let add = computed({
+                    get(){
+                        return a.value + b.value
+                    },
+                    set(val){
+                        a.value = val[0]
+                        b.value = val.splice(1)
+                    }
+                })
+                return{
+                    a,
+                    b,
+                    add
+                }
+            }
+        }).mount('#app')
+    </script>
+
+</body>
+</html>

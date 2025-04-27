@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成绩录入</title>
+    <!-- 引入 Vue 3 的生产环境版本 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script> 
+</head>
+<body>
+    <div id="app">
+        <!-- 绑定输入框到 Vue 数据模型 -->
+        语文: <input type="text" v-model="chinese"><br>
+        数学: <input type="text" v-model="math"><br>
+        英语: <input type="text" v-model="english"><br>
+        
+        <!-- 显示总分和平均分 -->
+        <p>您的总分是：{{ sum1 }}</p>
+        <p>您的平均分是：{{ avg }}</p>
+    </div>
+
+    <script>
+        // 从 Vue 中解构出 createApp, ref,computed
+        const { createApp, ref,computed,watch } = Vue;
+        
+        createApp({
+            /*
+            setup() 里:
+            1.定义响应式数据（ref、reactive）
+
+            2.创建计算属性（computed）
+
+            3.定义方法（methods 的替代方案）
+
+            4.使用生命周期钩子（onMounted、onUnmounted 等）
+
+           */
+            setup() {
+                // 使用 ref 创建响应式变量（初始化值为 0）
+                let chinese = ref(0);
+                let math = ref(0);
+                let english = ref(0);
+
+                // (()=>{ ... }) 是一个立即执行函数（IIFE），它会在 setup() 执行时立即运行，并返回一个计算结果
+                let sum1 = () => {
+                    //return Number(chinese.value) + Number(math.value) + Number(english.value);//sum1 依赖 chinese、math 和 english，当任何一门成绩发生变化时，sum1 会自动更新，无需手动调用
+                    //return eval([chinese.value, math.value, english.value].join('+'))//eval() 函数会将传入的字符串作为 JavaScript 代码进行求值
+                    return chinese.value + math.value + english.value
+                }
+                let avg1 = () =>{
+                        return sum1()/3
+                }
+                
+                //计算属性
+                let sum2 = computed(( ) =>{
+                    return chinese.value + math.value + english.value
+                })
+                let avg2 = computed(( ) =>{
+                    return sum2.value/3
+                })
+
+                //监听器
+                let sum3 = ref(0)
+                let avg3 = ref(0)
+                watch(chinese,(newVal1) => {
+                    sum3.value = newVal1 + math.value + english.value
+                })
+                watch(math,(newVal1) =>{
+                    sum3.value = chinese.value + newVal2 + english.value
+                })
+                watch(english,(newVal1) =>{
+                    sum3.value = chinese.value + math.value + newVal1
+                })
+                
+                // 返回数据，使其可以在 HTML 中使用
+                return {
+                    chinese,
+                    math,
+                    english,
+                    sum1,
+                    avg1,
+                    sum2,
+                    avg2,
+                    sum3,
+                    avg3
+                }
+            }
+        }).mount("#app"); // 将 Vue 应用挂载到 id 为 "app" 的 DOM 元素上
+    </script>
+</body>
+</html>
